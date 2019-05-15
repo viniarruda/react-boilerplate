@@ -18,3 +18,13 @@ Features:
 
 - Grid
 - Common Components
+
+
+# Build
+
+Run: ```npm install```
+
+After run: ```npm start```
+
+
+Enjoy and feels free to create new features and open pull requests!
