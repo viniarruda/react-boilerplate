@@ -1,12 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import useProducts from '../../state/product/hooks/useProducts'
 
 const Home = () => {
-  const [product, listProducts] = useProducts()
+  const [product, listProducts] = useProducts();
 
-  const handleClick = async() => {
-    await listProducts()
-  }
+  useEffect(() => {
+    const fetch = async () => {
+      await listProducts();
+    } 
+
+    fetch();
+  }, []);
 
   return (
    <div>    
@@ -14,8 +18,6 @@ const Home = () => {
     {
       product.loading && <h1>LOADING...</h1>
     }
-    <button onClick={() => handleClick()}>Load</button>
-    <button>Atualizar</button>
     {
       product.list && product.list.map((p) =>
         <div key={p.id}>{p.title}</div>
