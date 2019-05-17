@@ -8,17 +8,18 @@ import Form from './containers/form'
 
 const Login = (props) => {
   const { from } = props.location.state || {from: {pathname: "/"}};
-  const [{auth}, setLogin, isLoading] = useLogin()
+  const [auth, setLogin, isLoading] = useLogin();
 
   useEffect(() => {
-    if(!auth) return 
+    if(!auth) return;
 
   }, [auth])
 
-  if (auth && auth.logged) {
+
+  if (auth.logged) {
     return <Redirect to={from} />
   }
-
+  
   return (
     <Container>
       {
