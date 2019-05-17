@@ -1,21 +1,11 @@
 import React from 'react'
-import { loadProducts } from '../../state/product/queries'
-import { useStateValue } from '../../state'
-import { listProductsRequested, listProductsFulfilled, listProductsRejected } from '../../state/product/actions'
+import useProducts from '../../state/product/hooks/useProducts'
 
 const Home = () => {
-  const [{product}, dispatch] = useStateValue()
+  const [product, listProducts] = useProducts()
 
   const handleClick = async() => {
-    await dispatch(listProductsRequested())
-    const response = await loadProducts()
-
-    try {
-      await dispatch(listProductsFulfilled(response))
-    } catch (err) {
-      listProductsRejected(err)
-    }
-    
+    await listProducts()
   }
 
   return (
