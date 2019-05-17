@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import useProducts from '../../state/product/hooks/useProducts'
 
 const Home = () => {
@@ -8,13 +8,13 @@ const Home = () => {
     const fetch = async () => {
       await listProducts();
     } 
+  
 
     fetch();
   }, []);
 
   return (
-   <div>    
-    <h1>Home</h1>
+   <div>
     {
       console.log(product)
     }
@@ -23,7 +23,10 @@ const Home = () => {
     }
     {
       product.list && product.list.map((p) =>
-        <div key={p.id}>{p.title}</div>
+        <div key={p.id}>
+          <h1>{p.title}</h1>
+          <span>$   {p.price}</span>
+        </div>
       )
     }
    </div> 

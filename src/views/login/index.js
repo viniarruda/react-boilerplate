@@ -7,7 +7,7 @@ import Container from './containers/container'
 import Form from './containers/form'
 
 const Login = (props) => {
-  const { from } = props.location.state || {from: {pathname: "/"}};
+  const { from } = props.location.state || {from: {pathname: "/home"}};
   const [auth, setLogin, isLoading] = useLogin();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const Login = (props) => {
   if (auth.logged) {
     return <Redirect to={from} />
   }
-  
+
   return (
     <Container>
       {
