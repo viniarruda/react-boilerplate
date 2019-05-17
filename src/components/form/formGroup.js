@@ -1,11 +1,10 @@
 import styled from 'styled-components'
 
-const Content = styled.div`
+const formGroup = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  width: 100%;
-`
+  justify-content: center;
+`;
 
-export default Content
+export default formGroup

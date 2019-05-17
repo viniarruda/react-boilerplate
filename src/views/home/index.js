@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import useProducts from '../../state/product/hooks/useProducts'
 
 const Home = () => {
-  const [product, listProducts] = useProducts();
+  const [product, listProducts, isLoading] = useProducts();
 
   useEffect(() => {
     const fetch = async () => {
@@ -10,13 +10,16 @@ const Home = () => {
     } 
 
     fetch();
-  }, []);
+  });
 
   return (
    <div>    
     <h1>Home</h1>
     {
-      product.loading && <h1>LOADING...</h1>
+      console.log(product)
+    }
+    {
+      isLoading && <h1>LOADING...</h1>
     }
     {
       product.list && product.list.map((p) =>

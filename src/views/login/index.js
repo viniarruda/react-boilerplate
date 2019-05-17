@@ -1,29 +1,31 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 
-import { useStateValue } from '../../state'
-import { login } from '../../state/auth/actions'
+import useLogin from '../../state/auth/hooks/useLogin'
 
-import Content from '../../components/content'
+import Container from './containers/container'
+import Form from './containers/form'
 
 const Login = (props) => {
-  const { from } = props.location.state || {from: {pathname: "/home"}};
+  const { from } = props.location.state || {from: {pathname: "/"}};
+  const [{auth}, setLogin, isLoading] = useLogin()
 
-  const [{auth}, dispatch] = useStateValue()
+  useEffect(() => {
+    if(!auth) return 
 
-  async function handleClick() {
-    await dispatch(login());
-  }
+  }, [auth])
 
-  if (auth.logged) {
+  if (auth && auth.logged) {
     return <Redirect to={from} />
   }
 
   return (
-    <Content>
-      <h2>You need to be logged to see the route: {from.pathname}</h2>
-      <button onClick={handleClick}>Login</button>
-    </Content>
+    <Container>
+      {
+        isLoading && <span>Loading...</span>
+      }
+      <Form onSubmit={(values, actions) => setLogin({values, actions})} />
+    </Container>
   )
 }
 

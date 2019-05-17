@@ -4,14 +4,28 @@ import styled from 'styled-components'
 import { useStateValue } from '../state'
 import { logout } from '../state/auth/actions'
 
+import Button from './button'
+
 const Nav = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  width: 100%;
   height: 50px;
-  background-color: #e6e6e6;
-`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;    
+  background: #f8f9fa;
+  position: ${props => props.fixed ? 'fixed' : 'relative'};
+`;
+
+const Right = styled.nav`
+  flex: 1;
+  text-align: right;
+`;
+
+const Title = styled.h1`
+  margin: 0;
+  color: #000;
+  font-weight: 600;
+`;
 
 const Header = (props) => {
   const [{auth}, dispatch] = useStateValue()
@@ -22,10 +36,12 @@ const Header = (props) => {
 
   return (
     <Nav>
-      <span>Header</span>
-      {
-        auth.logged && <button onClick={() => handleLogout()}>Logout</button>
-      }
+      <Title>Header</Title>
+      <Right>
+        {
+          auth.logged && <Button gradient onClick={() => handleLogout()}>Logout</Button>
+        }
+      </Right>
     </Nav>
   )
 }

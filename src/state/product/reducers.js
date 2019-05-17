@@ -1,31 +1,17 @@
 import {
-  LIST_PRODUCTS_REQUESTED,
-  LIST_PRODUCTS_FULFILLED,
-  LIST_PRODUCTS_REJECTED
+  LIST_PRODUCTS,
 } from "./actions";
 
 export const INITIAL_STATE = {
-  list: null,
-  loading: false
+  list: null
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LIST_PRODUCTS_REQUESTED:
-      return {
-        ...state,
-        loading: true,
-        list: null,
-      };
-    case LIST_PRODUCTS_FULFILLED:
+    case LIST_PRODUCTS:
       return {
         ...state,
         list: action.payload,
-        loading: false
-      }
-    case LIST_PRODUCTS_REJECTED:
-      return {
-        ...INITIAL_STATE
       }
     default:
       return state;

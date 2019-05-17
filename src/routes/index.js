@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import {BrowserRouter as Router, Route,Switch} from 'react-router-dom'
 import {StateProvider} from '../state';
 import { INITIAL_STATE as AUTH_INITIAL_STATE } from '../state/auth/reducers'
@@ -6,6 +6,7 @@ import { INITIAL_STATE as PRODUCT_INITIAL_STATE } from '../state/product/reducer
 import reducers from "../state/reducers";
 import BaseStyles from './base-styles';
 import PrivateRoute from './private-route'
+import Content from '../components/content'
 import Header from '../components/header'
 import Login from '../views/login'
 import Home from '../views/home'
@@ -19,13 +20,15 @@ const Root = props => {
       <StateProvider initialState={initialState} reducer={reducers}>
         <BaseStyles />
         <Router>
-          <Fragment>
+          <>
             <Header />
-            <Switch>
-              <Route exact path="/" component={Login} />
-              <PrivateRoute path="/home" component={Home} />
-            </Switch>
-          </Fragment>
+            <Content>
+              <Switch>
+                <Route exact path="/" component={Login} />
+                <PrivateRoute path="/home" component={Home} />
+              </Switch>
+            </Content>
+          </>
         </Router>
       </StateProvider>
     )

@@ -7,6 +7,7 @@ This project is a boilerplate for React, including:
 - Context
 - Hooks (useReducer, useContext)
 - State Global using Context + Hooks
+- Custom Hooks (Like redux Thunks)
 - Axios
 - Simple Authentication
 - Private-Route

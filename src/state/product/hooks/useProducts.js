@@ -1,29 +1,30 @@
+import { useState } from 'react'
 import { useStateValue } from '../../index'
 import { loadProducts } from '../queries'
 import { 
-  listProductsRequested,
-  listProductsFulfilled,
-  listProductsRejected
+  listProducts,
 } from '../actions'
 
 const useProducts = () => {
   const [{product}, dispatch] = useStateValue()
+  const [isLoading, setIsLoading] = useState()
 
   const formData = async () => {
-    dispatch(listProductsRequested())
+    setIsLoading(true)
   
     const response = await loadProducts();
-
-    if (!response) {
-      let err = 'Error'
-      dispatch(listProductsRejected(err))
+    
+    if (response) {
+      dispatch(listProducts(response))
+    } else {
+      const err = []
+      dispatch(listProducts(err))
     }
-
-    dispatch(listProductsFulfilled(response))
+    setIsLoading(false)
   }
 
 
-  return [product, formData]
+  return [product, formData, isLoading]
 }
 
 export default useProducts
