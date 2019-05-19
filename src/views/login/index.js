@@ -5,6 +5,7 @@ import useLogin from '../../state/auth/hooks/useLogin'
 
 import Container from './containers/container'
 import Form from './containers/form'
+import Spinner from '../../components/spinner'
 
 const Login = (props) => {
   const { from } = props.location.state || {from: {pathname: "/home"}};
@@ -12,7 +13,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if(!auth) return;
-
+    
   }, [auth])
 
 
@@ -22,9 +23,7 @@ const Login = (props) => {
 
   return (
     <Container>
-      {
-        isLoading && <span>Loading...</span>
-      }
+      <Spinner show={isLoading} />
       <Form onSubmit={(values, actions) => setLogin({values, actions})} />
     </Container>
   )
