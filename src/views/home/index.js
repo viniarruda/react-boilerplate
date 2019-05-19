@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import useProducts from '../../state/product/hooks/useProducts'
 
+import Spinner from '../../components/spinner'
+
 const Home = () => {
   const [product, listProducts, isLoading] = useProducts();
 
@@ -15,17 +17,12 @@ const Home = () => {
 
   return (
    <div>
-    {
-      console.log(product)
-    }
-    {
-      isLoading && <h1>LOADING...</h1>
-    }
+     <Spinner show={isLoading} />
     {
       product.list && product.list.map((p) =>
         <div key={p.id}>
           <h1>{p.title}</h1>
-          <span>$   {p.price}</span>
+          <span>${p.price}</span>
         </div>
       )
     }
