@@ -7,7 +7,7 @@ import {
 
 const useProducts = () => {
   const [{product}, dispatch] = useStateValue()
-  const [isLoading, setIsLoading] = useState()
+  const [isLoading, setIsLoading] = useState(false)
 
   const formData = async () => {
     setIsLoading(true)
