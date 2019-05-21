@@ -27,6 +27,7 @@ const LoginForm = props => (
         <Input
           id='password'
           name='password'
+          type={'password'}
           placeholder={'Password'}
           onChange={handleChange('password')}
           onBlur={handleBlur('password')}

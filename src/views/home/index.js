@@ -4,23 +4,22 @@ import useProducts from '../../state/product/hooks/useProducts'
 import Spinner from '../../components/spinner'
 import List from './components/list'
 import Card from './components/card'
+import Button from "../../components/button";
 
 const Home = () => {
-  const [product, listProducts, isLoading] = useProducts();
+  const [product, isLoading, setListProducts] = useProducts();
 
   useEffect(() => {
-    const fetch = async () => {
-      await listProducts();
-    } 
-  
-
-    fetch();
+    if (!product.list || product.list.length === 0) {
+      setListProducts();
+    }
   }, []);
 
   return (
    <div>
      <Spinner show={isLoading} />
-     <List >
+     <Button primary large onClick={setListProducts} type="submit" >Refresh</Button>
+     <List>
       {
         product.list && product.list.map((p) =>
           <Card key={p.id}>
@@ -30,8 +29,8 @@ const Home = () => {
         )
       }
     </List>
-   </div> 
+   </div>
   )
-}
+};
 
 export default Home
