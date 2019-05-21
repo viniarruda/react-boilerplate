@@ -19,6 +19,7 @@ Features:
 
 - Grid
 - Common Components
+- Docz for components
 
 
 # Build
