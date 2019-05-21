@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useStateValue } from '../../index'
 import { loadProducts } from '../queries'
-import { 
+import {
   listProducts,
 } from '../actions'
 
@@ -9,11 +9,11 @@ const useProducts = () => {
   const [{product}, dispatch] = useStateValue()
   const [isLoading, setIsLoading] = useState(false)
 
-  const formData = async () => {
+  const request = async () => {
     setIsLoading(true)
-  
+
     const response = await loadProducts();
-    
+
     if (response) {
       dispatch(listProducts(response))
     } else {
@@ -23,8 +23,7 @@ const useProducts = () => {
     setIsLoading(false)
   }
 
-
-  return [product, formData, isLoading]
+  return [product, isLoading, request]
 }
 
 export default useProducts

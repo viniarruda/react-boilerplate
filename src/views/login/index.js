@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react'
-import { Redirect } from 'react-router-dom'
 
 import useLogin from '../../state/auth/hooks/useLogin'
 
@@ -12,14 +11,10 @@ const Login = (props) => {
   const [auth, setLogin, isLoading] = useLogin();
 
   useEffect(() => {
-    if(!auth) return;
-    
-  }, [auth])
-
-
-  if (auth.logged) {
-    return <Redirect to={from} />
-  }
+    if (auth.logged) {
+      props.history.push(from);
+    }
+  }, [auth]);
 
   return (
     <Container>
@@ -27,6 +22,6 @@ const Login = (props) => {
       <Form onSubmit={(values, actions) => setLogin({values, actions})} />
     </Container>
   )
-}
+};
 
 export default Login
