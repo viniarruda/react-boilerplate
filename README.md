@@ -13,15 +13,6 @@ This project is a boilerplate for React, including:
 - Private-Route
 - Styled-component with GlobalStyle
 
-
-
-Features:
-
-- Grid
-- Common Components
-- Docz for components
-
-
 # Build
 
 Run: ```npm install```
