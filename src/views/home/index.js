@@ -1,36 +1,42 @@
-import React, { useEffect } from 'react'
-import useProducts from '../../state/product/hooks/useProducts'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import io from "socket.io-client";
 
-import Spinner from '../../components/spinner'
-import List from './components/list'
-import Card from './components/card'
 import Button from "../../components/button";
 
 const Home = () => {
-  const [product, isLoading, setListProducts] = useProducts();
+  const [socket, setSocket] = useState(null);
+  const [id, setId] = useState("");
 
   useEffect(() => {
-    if (!product.list || product.list.length === 0) {
-      setListProducts();
-    }
-  }, []);
+    const socket = io("http://localhost:3333", {
+      query: { user: +id }
+    });
+
+    socket.on("lobby", user => {
+      setSocket(user);
+    });
+  }, [id]);
+
+  const handleChange = event => {
+    setId(event.target.value);
+  };
+
+  const handleClick = async () => {
+    const { data } = await axios.post("http://localhost:3333/lobby");
+
+    console.log(data);
+  };
 
   return (
-   <div>
-     <Spinner show={isLoading} />
-     <Button primary large onClick={setListProducts} type="submit" >Refresh</Button>
-     <List>
-      {
-        product.list && product.list.map((p) =>
-          <Card key={p.id}>
-            <h1>{p.title}</h1>
-            <span>${p.price}</span>
-          </Card>
-        )
-      }
-    </List>
-   </div>
-  )
+    <div>
+      {console.log("socket", socket)}
+      <input type="text" onChange={event => handleChange(event)} value={id} />
+      <Button primary large onClick={() => handleClick()} type="submit">
+        Refresh
+      </Button>
+    </div>
+  );
 };
 
-export default Home
+export default Home;
