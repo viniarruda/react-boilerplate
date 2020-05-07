@@ -1,6 +1,5 @@
-import styled from 'styled-components'
-import theme from '../../../components/theme'
-
+import styled from 'styled-components';
+import theme from '../../../components/theme';
 
 const Card = styled.li`
   border-radius: 3px;
@@ -9,5 +8,4 @@ const Card = styled.li`
   padding: 15px;
 `;
 
-
-export default Card
+export default Card;

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Container = styled.div`
   display: flex;
@@ -6,6 +6,6 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   height: calc(100vh - 50px);
-`
+`;
 
-export default Container
+export default Container;

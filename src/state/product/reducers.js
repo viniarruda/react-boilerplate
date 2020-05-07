@@ -1,9 +1,7 @@
-import {
-  LIST_PRODUCTS,
-} from "./actions";
+import { LIST_PRODUCTS } from './actions';
 
 export const INITIAL_STATE = {
-  list: null
+  list: null,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -12,7 +10,7 @@ export default (state = INITIAL_STATE, action) => {
       return {
         ...state,
         list: action.payload,
-      }
+      };
     default:
       return state;
   }

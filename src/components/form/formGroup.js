@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const formGroup = styled.div`
   display: flex;
@@ -7,4 +7,4 @@ const formGroup = styled.div`
   justify-content: center;
 `;
 
-export default formGroup
+export default formGroup;

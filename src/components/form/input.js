@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 const Input = styled.input`
   margin: 10px 5px;
@@ -9,4 +9,4 @@ const Input = styled.input`
   width: 100%;
 `;
 
-export default Input
+export default Input;
