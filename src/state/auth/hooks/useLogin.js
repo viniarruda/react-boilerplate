@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useStateValue } from '../../index';
 import { login } from '../actions';
 
-const useProducts = () => {
+const useLogin = () => {
   const [{ auth }, dispatch] = useStateValue();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,4 +18,4 @@ const useProducts = () => {
   return [auth, formData, isLoading];
 };
 
-export default useProducts;
+export default useLogin;
