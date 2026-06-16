@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+/* ------------------------------------------------------------------ *
+ *  Theme tokens  →  Tailwind utilities
+ * ------------------------------------------------------------------ */
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Hanken Grotesk', ui-sans-serif, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Palette — "neo-terminal" (dark by default, light fallback)
+ * ------------------------------------------------------------------ */
+:root {
+  --radius: 0.625rem;
+
+  --background: oklch(0.985 0.003 240);
+  --foreground: oklch(0.2 0.02 255);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.02 255);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.02 255);
+  --primary: oklch(0.72 0.19 130);
+  --primary-foreground: oklch(0.18 0.04 130);
+  --secondary: oklch(0.96 0.005 250);
+  --secondary-foreground: oklch(0.24 0.02 255);
+  --muted: oklch(0.96 0.005 250);
+  --muted-foreground: oklch(0.52 0.02 255);
+  --accent: oklch(0.95 0.01 250);
+  --accent-foreground: oklch(0.24 0.02 255);
+  --destructive: oklch(0.58 0.22 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.9 0.008 255);
+  --input: oklch(0.9 0.008 255);
+  --ring: oklch(0.72 0.19 130);
+}
+
+.dark {
+  --background: oklch(0.155 0.014 256);
+  --foreground: oklch(0.95 0.006 240);
+  --card: oklch(0.188 0.016 256);
+  --card-foreground: oklch(0.95 0.006 240);
+  --popover: oklch(0.19 0.016 256);
+  --popover-foreground: oklch(0.95 0.006 240);
+  --primary: oklch(0.9 0.2 124);
+  --primary-foreground: oklch(0.22 0.05 130);
+  --secondary: oklch(0.24 0.016 256);
+  --secondary-foreground: oklch(0.95 0.006 240);
+  --muted: oklch(0.24 0.016 256);
+  --muted-foreground: oklch(0.68 0.018 252);
+  --accent: oklch(0.275 0.02 256);
+  --accent-foreground: oklch(0.95 0.006 240);
+  --destructive: oklch(0.66 0.2 24);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.36 0.014 256 / 50%);
+  --input: oklch(0.4 0.014 256 / 45%);
+  --ring: oklch(0.9 0.2 124 / 60%);
+}
+
+/* ------------------------------------------------------------------ *
+ *  Base
+ * ------------------------------------------------------------------ */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    min-height: 100dvh;
+    /* Blueprint grid + radial glow atmosphere */
+    background-image:
+      radial-gradient(60rem 60rem at 80% -10%, oklch(0.9 0.2 124 / 0.08), transparent 60%),
+      radial-gradient(50rem 50rem at 0% 110%, oklch(0.6 0.16 256 / 0.1), transparent 55%),
+      linear-gradient(to right, oklch(0.5 0.02 256 / 0.04) 1px, transparent 1px),
+      linear-gradient(to bottom, oklch(0.5 0.02 256 / 0.04) 1px, transparent 1px);
+    background-size:
+      100% 100%,
+      100% 100%,
+      56px 56px,
+      56px 56px;
+    background-attachment: fixed;
+  }
+
+  /* Fine grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.035;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection {
+    background: oklch(0.9 0.2 124 / 0.85);
+    color: oklch(0.22 0.05 130);
+  }
+}
+
+/* ------------------------------------------------------------------ *
+ *  Utilities — reveal animation + decorative helpers
+ * ------------------------------------------------------------------ */
+@layer utilities {
+  .reveal {
+    opacity: 0;
+    animation: reveal 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    animation-delay: var(--reveal-delay, 0ms);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 28px oklch(0.9 0.2 124 / 0.35);
+  }
+
+  .grid-fade {
+    -webkit-mask-image: radial-gradient(circle at center, black, transparent 78%);
+    mask-image: radial-gradient(circle at center, black, transparent 78%);
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+  }
+}
